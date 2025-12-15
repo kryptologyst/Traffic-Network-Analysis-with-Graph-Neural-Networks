@@ -1,0 +1,51 @@
+data:
+  batch_size: 32
+  data_dir: data
+  dataset_name: synthetic_traffic
+  dropout_rate: 0.1
+  noise_std: 0.01
+  num_workers: 4
+  pin_memory: true
+  prediction_horizon: 3
+  sequence_length: 12
+  test_ratio: 0.15
+  train_ratio: 0.7
+  val_ratio: 0.15
+device: auto
+evaluation:
+  horizons:
+  - 1
+  - 3
+  - 6
+  - 12
+  metrics:
+  - mae
+  - rmse
+  - mape
+experiment_name: traffic_forecasting
+model:
+  activation: relu
+  dropout: 0.1
+  hidden_dim: 64
+  name: STGCN
+  num_layers: 2
+  num_spatial_filters: 64
+  num_temporal_filters: 64
+  spatial_kernel_size: 3
+  temporal_kernel_size: 3
+  use_batch_norm: true
+  use_residual: true
+output_dir: outputs
+seed: 42
+training:
+  epochs: 100
+  gradient_clip: 1.0
+  learning_rate: 0.001
+  log_interval: 10
+  min_delta: 0.001
+  patience: 15
+  save_interval: 10
+  scheduler: cosine
+  use_amp: true
+  warmup_epochs: 10
+  weight_decay: 0.0001
